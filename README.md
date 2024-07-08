@@ -9,8 +9,8 @@
 
 1. clone the respository
    ```shell
-   $ git clone https://github.com/JosphineG/InnerGlow-Backend.git
-   $ cd InnerGlow-Backend
+   $ git clone https://github.com/David-mwas/zentalk-backend.git
+   $ cd zentalk-backend
    $ touch .env
    ```
 2. Add the following variables to the .env file
@@ -26,7 +26,7 @@
 
 > **request**
 
-- url: inner-glow-backend.vercel.app/api/v1/auth/register
+- url: https://zentalk-backend.vercel.app/api/v1/auth/register
 - method: POST
 - example of a request body:
   ```json
@@ -51,7 +51,7 @@
 
 > **request**
 
-- url: inner-glow-backend.vercel.app/api/v1/auth/login
+- url: https://zentalk-backend.vercel.app/api/v1/auth/login
 - method: POST
 - request body:
   ```json
@@ -71,7 +71,7 @@
 
 > **request**
 
-- url: inner-glow-backend.vercel.app/api/v1/user/profile
+- url: https://zentalk-backend.vercel.app/api/v1/user/profile
 - method: GET
 
 > **response**
@@ -88,7 +88,7 @@
 
 > **request**
 
-- url: inner-glow-backend.vercel.app/api/v1/user/edit-profile
+- url: https://zentalk-backend.vercel.app/api/v1/user/edit-profile
 - method: POST
 
 * request body:
@@ -114,7 +114,7 @@
 
 > **request**
 
-- url: inner-glow-backend.vercel.app/api/v1/user/forget-password
+- url: https://zentalk-backend.vercel.app/api/v1/user/forget-password
 - method: POST
 
 * request body:
@@ -137,7 +137,7 @@
 
 > **request**
 
-- url: inner-glow-backend.vercel.app/api/v1/user/reset-password
+- url: https://zentalk-backend.vercel.app/api/v1/user/reset-password
 - method: GET
 
 * query params:
@@ -145,7 +145,7 @@
   token: string
   ```
   ```json
-  example of a url:  https:/api/v1/auth/reset-password?token="random string"
+  example of a url: https://zentalk-backend.vercel.app/api/v1/auth/reset-password?token="random string"
   ```
 
 > **response**
@@ -163,7 +163,7 @@
 
 > **request**
 
-- url: inner-glow-backend.vercel.app/api/v1/user/reset-password
+- url: https://zentalk-backend.vercel.app/api/v1/user/reset-password
 - method: POST
 
 * query params:
