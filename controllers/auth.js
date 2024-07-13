@@ -10,7 +10,7 @@ exports.Register = async (req, res, next) => {
     const data = req.body;
     const regex = /^\+\d{1,3}\d{3,}$/;
     const result = registerSchema.validate(data);
-    if (result.error) {
+    if (result?.error) {
       const error = result.error.details[0].message;
       throw createError.BadRequest(error);
     }
@@ -24,7 +24,7 @@ exports.Register = async (req, res, next) => {
     return res.status(200).json({
       status: "success",
       message: "user registerd successfully",
-      userId: user._id,
+      userId: user?._id,
     });
   } catch (error) {
     next(error);
@@ -47,7 +47,7 @@ exports.login = async (req, res, next) => {
     }
     const token = await generateAccessToken({
       email: email,
-      userID: exist_user.id,
+      userID: exist_user?.id,
     });
     return res.status(200).json({
       status: "success",
@@ -77,7 +77,7 @@ exports.forgotPassword = async (req, res) => {
     }
     const token = await generateAccessToken({
       email: email,
-      userID: exist_user.id,
+      userID: exist_user?.id,
     });
     let link = `${process.env.frontendUrl}/reset-password/${token}`;
     const resetLink = `
@@ -94,15 +94,18 @@ exports.forgotPassword = async (req, res) => {
     });
     return res.status(200).json({ success: "email sent to the user" });
   } catch (error) {
+    console.log(error, error.message);
     return res.status(500).json({ error: error.message });
   }
 };
 exports.VerifyResetToken = async (req, res, next) => {
   try {
     const { token } = req.query;
-    const payload =  await verifyResetToken(token);
-    if(!payload){
-      throw createError.BadRequest("Invalid link. please use the link sent to your email ..")
+    const payload = await verifyResetToken(token);
+    if (!payload) {
+      throw createError.BadRequest(
+        "Invalid link. please use the link sent to your email .."
+      );
     }
     return res.status(200).json({ email: payload.email });
   } catch (error) {
