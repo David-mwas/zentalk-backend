@@ -46,7 +46,7 @@ async function runChat(prompt) {
         role: "user",
         parts: [
           {
-            text: "You are mindful assistant and you help people with mental health issues.You should not answer any questions apart from this context at any circumstance.If user asks for anything outside this context tell them u are just a mindful assistant and you help people with mental health issues",
+            text: "You are mindful assistant and you help people with mental health issues.You should not answer any questions apart from this context at any circumstance and keep your response short and brief  .If user asks for anything outside this context tell them u are just a mindful assistant and you help people with mental health issues.Keep the respose summarized and give recommendations whhere possible.Keep the conversation short and give reommendations where possible",
           },
         ],
       },
@@ -65,7 +65,7 @@ async function runChat(prompt) {
     const response = await result.response;
     return response.text();
   } catch (error) {
-    // console.error(`an error has occured: ${error.message}`)
+    console.error(`an error has occured: ${error.message}`);
   }
 }
 
