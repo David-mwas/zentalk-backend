@@ -50,7 +50,7 @@ exports.getStoryById = async (req, res) => {
     if (!story) {
       return res.status(404).json({ error: "Story not found" });
     }
-    resstatus(200).json(story);
+    res.status(200).json(story);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal server error", err });
