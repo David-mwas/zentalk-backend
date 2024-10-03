@@ -46,11 +46,28 @@ exports.getAllStories = async (req, res) => {
 // Controller for getting a Story by ID
 exports.getStoryById = async (req, res) => {
   try {
-    const story = await Story.findById(req?.params.id);
+    const story = await Story.findById(req?.params?.id);
     if (!story) {
-      return res.status(404).json({ error: "Story not found" });
+      return res.status(404).json({ error: "Article not found" });
     }
-    res.status(200).json(story);
+    // Find the user who created the article
+    const user = await userModel.findById(story.createdBy);
+
+    if (!user) {
+      console.log("User not found");
+      return res.status(500).json({ error: "User not found" });
+    }
+
+    const storyData = {
+      image: story?.image?.url,
+      _id: story?._id,
+      title: story?.title,
+      description: story?.description,
+      createdBy: user.username,
+      category:story?.category,
+      time: story?.time,
+    };
+    res.status(200).json(storyData);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal server error", err });
