@@ -46,11 +46,11 @@ exports.getAllStories = async (req, res) => {
 // Controller for getting a Story by ID
 exports.getStoryById = async (req, res) => {
   try {
-    const Story = await Story.findById(req?.params.id);
-    if (!Story) {
+    const story = await Story.findById(req?.params.id);
+    if (!story) {
       return res.status(404).json({ error: "Story not found" });
     }
-    resstatus(200).json(Story);
+    resstatus(200).json(story);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal server error", err });
