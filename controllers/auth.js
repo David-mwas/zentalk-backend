@@ -27,6 +27,7 @@ exports.Register = async (req, res, next) => {
       userId: user?._id,
     });
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };
@@ -54,6 +55,7 @@ exports.login = async (req, res, next) => {
       access_token: token,
     });
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };
@@ -81,8 +83,8 @@ exports.forgotPassword = async (req, res) => {
     });
     let link = `${process.env.frontendUrl}/reset-password/${token}`;
     const resetLink = `
-    <h1>Hello ${exist_user.username}, from rafikiwellness</h1>
-    <h3>Click this link to reset password  for your rafikiwellness account</h3>
+    <h1>Hello ${exist_user.username}, from ${process.env.frontendApp}</h1>
+    <h3>Click this link to reset password  for your ${process.env.frontendApp} account</h3>
     <a href="${link}">Reset Password</a>
     <hr/>
     <h4>The link will expire in 1 day.</h4>
