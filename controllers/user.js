@@ -4,8 +4,8 @@ const { hashPassword } = require("../utils/hashPassword");
 exports.userProfile = async (req, res, next) => {
   const user = await userModel.findById(req.payload.aud);
   const userProfile = {
-    username: user.username,
-    email: user.email,
+    username: user?.username,
+    email: user?.email,
   };
   return res.status(200).json({ userProfile: userProfile, userId: user._id });
 };

@@ -50,6 +50,7 @@ app.use(async (error, req, res, next) => {
 
 const port = process.env.PORT || 5000;
 
+// start the server
 app.listen(port, (error) => {
   if (error) {
     console.error(`An error has occured: ${error}`);
