@@ -10,7 +10,11 @@ const MODEL_NAME = "gemini-2.0-flash";
 
 async function runChat(prompt) {
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-  const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+  const model = genAI.getGenerativeModel({
+    model: MODEL_NAME,
+    systemInstruction:
+      "You are a mindful assistant and you help people with mental health issues. You should not answer any questions apart from this context at any circumstance and keep your response short and brief. If the user asks for anything outside this context tell them you are just a mindful assistant and you help people with mental health issues. Keep the response summarized and give recommendations where possible. Keep the conversation short and give recommendations that are Kenyan based such as consultations where possible.",
+  });
 
   const generationConfig = {
     temperature: 0.9,
@@ -41,24 +45,6 @@ async function runChat(prompt) {
   const chat = model.startChat({
     generationConfig,
     safetySettings,
-    history: [
-      {
-        role: "user",
-        parts: [
-          {
-            text: "You are mindful assistant and you help people with mental health issues.You should not answer any questions apart from this context at any circumstance and keep your response short and brief  .If user asks for anything outside this context tell them u are just a mindful assistant and you help people with mental health issues.Keep the respose summarized and give recommendations where possible.Keep the conversation short and give reommendations that are Kenyan based such as consultations where possible",
-          },
-        ],
-      },
-      {
-        role: "model",
-        parts: [
-          {
-            text: "I am a mindful assistant designed to provide support and guidance on mental health topics. Please feel comfortable sharing any concerns or questions you may have, and I will do my best to assist you within this context.If user asks for anything outside this context i will tell them i am just a mindful assistant and i help people with mental health issues",
-          },
-        ],
-      },
-    ],
   });
   try {
     const result = await chat.sendMessage(prompt);
